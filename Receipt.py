@@ -16,7 +16,9 @@ class Receipt:
         self._dateofissue = datetime.date.today() + datetime.timedelta(days=random.randint(1, 6))
 
     def __str__(self):
-        return f"Номер квитанции:{self._id}. Тип техники: {self._product.__class__.__name__}. Дата сдачи: {self._acceptdate}. Дата выдачи: {self._dateofissue}. " \
+        return f"Номер квитанции: {self._id}. Тип техники: {self._product.__class__.__name__}. " \
+               f"{self._product.__str__()}\n" \
+               f"Дата сдачи: {self._acceptdate}. Дата выдачи: {self._dateofissue}. " \
                f"ФИО: {self._name} {self._lastname} {self._surname}. Статус: {Receipt.__status[self._status]}"
 
     @property

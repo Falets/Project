@@ -1,4 +1,7 @@
-import Product
+from Product import Product
+from Product import Computer
+from Product import TV
+from Product import Mobile
 from Receipt import Receipt
 from Workshop import Workshop
 import src
@@ -30,29 +33,19 @@ def create_computer(mark, description):
 def create_receipt(workshop, name, lastname, surname):
     while True:
         type = input(src.user_type)
+        mark = input(src.user_mark)
+        brdescript = input(src.user_breakdescription)
         if type == "1":
-            mark = input(src.user_mark)
-            brdescript = input(src.user_breakdescription)
             receipt = Receipt(create_tv(mark, brdescript), name, lastname, surname)
-            workshop.add_receipt(receipt)
-            print(receipt)
-            break
         elif type == "2":
-            mark = input(src.user_mark)
-            brdescript = input(src.user_breakdescription)
             receipt = Receipt(create_computer(mark, brdescript), name, lastname, surname)
-            workshop.add_receipt(receipt)
-            print(receipt)
-            break
         elif type == "3":
-            mark = input(src.user_mark)
-            brdescript = input(src.user_breakdescription)
             receipt = Receipt(create_mobile(mark, brdescript), name, lastname, surname)
-            workshop.add_receipt(receipt)
-            print(receipt)
-            break
         else:
             print(src.user_wrong)
+        workshop.add_receipt(receipt)
+        print(receipt)
+        break
 
 def user(workshop):
     try:
