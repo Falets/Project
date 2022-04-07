@@ -1,7 +1,4 @@
-from Product import Product
-from Mobile import Mobile
-from TV import TV
-from Computer import Computer
+import Product
 from Receipt import Receipt
 from Workshop import Workshop
 import src
