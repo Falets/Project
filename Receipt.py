@@ -36,5 +36,3 @@ class Receipt:
     @property
     def surname(self):
         return self._surname
-
-

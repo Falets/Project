@@ -8,7 +8,7 @@ import src
 import datetime
 import random
 
-def FIO():
+def fio_input():
     name = input(src.name)
     lastname = input(src.lastname)
     surname = input(src.surname)
@@ -49,7 +49,7 @@ def create_receipt(workshop, name, lastname, surname):
 
 def user(workshop):
     try:
-        name, lastname, surname = FIO()
+        name, lastname, surname = fio_input()
         while True:
             choice = input(src.user_path)
             if choice == "1":

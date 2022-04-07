@@ -31,7 +31,7 @@ class Mobile(Product):
         self._system = system
 
     def __str__(self):
-        return f"{super().__str__()}. {self._system}. "
+        return f"{super().__str__()}. Система: {self._system}. "
 
 class TV(Product):
 
