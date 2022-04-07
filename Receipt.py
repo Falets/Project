@@ -1,4 +1,3 @@
-import Product
 import datetime
 import random
 

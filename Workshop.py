@@ -1,9 +1,3 @@
-import Product
-from Receipt import Receipt
-import datetime
-import random
-
-
 class Workshop:
     def __init__(self, receipt_names: list, password):
         self.__receipt = {receipt.id: receipt for receipt in receipt_names}
