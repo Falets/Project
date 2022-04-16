@@ -56,6 +56,23 @@ def create_receipt(workshop, name, lastname, surname):
         print(receipt)
         break
 
+def show_info(workshop, name, lastname, surname):
+    while True:
+        path_info = input(src.VARIANT+src.ID_FIO_INFO)
+        if path_info == "1":
+            info_1 = int(input(src.ID_INFO))
+            receipt = workshop.get_receipt(info_1)
+            if receipt.name == name and receipt.lastname == lastname and receipt.surname == surname:
+                print(receipt)
+            else:
+                print(src.CANNOT_SHOW)
+        elif path_info == "2":
+            for receipts in workshop.get_receipt_fio(name, lastname, surname):
+                print(receipts)
+        else:
+            print(src.USER_WRONG)
+        break
+
 def user(workshop):
     try:
         name, lastname, surname = fio_input()
@@ -67,13 +84,19 @@ def user(workshop):
                     break
                 else:
                     continue
+            elif choice == "2":
+                show_info(workshop, name, lastname, surname)
+                if return_menu():
+                    break
+                else:
+                    continue
             else:
                 break
     except Exception as e:
         print(e)
 
 def main():
-    workshop = Workshop([], src.Password)
+    workshop = Workshop([], src.PASSWORD)
     while True:
         choice = input(src.VARIANT+src.MAIN_PATH)
         if choice == "1":
