@@ -1,7 +1,9 @@
+from Admin import Admin
+
 class Workshop:
-    def __init__(self, receipt_names: list, password):
+    def __init__(self, receipt_names: list, admin_list: list):
         self.__receipt = {receipt.id: receipt for receipt in receipt_names}
-        self.__password = password
+        self.__admin_list = admin_list
 
     def add_receipt(self, new_receipt):
         self.__receipt.update({new_receipt.id: new_receipt})
@@ -19,7 +21,28 @@ class Workshop:
                 receipt_names_fio.append(receipt)
         return receipt_names_fio
 
-    def check_password(self, password):
-        if password == self.__password:
-            return True
-        return False
+    def all_admins(self):
+        for admin in self.__admin_list:
+            print(admin)
+
+    def add_admin(self, login, password):
+        for admin in self.__admin_list:
+            if admin.login == login:
+                print("login занят")
+                break
+        else:
+            self.__admin_list.append(Admin(login, password))
+
+    def delete_admin(self, login):
+        for admin in self.__admin_list:
+            if admin.login == login:
+                self.__admin_list.remove(admin)
+
+    def get_admin(self, login):
+        for admin in self.__admin_list:
+            if admin.login == login:
+                return admin
+
+    @property
+    def admin_list(self):
+        return self.__admin_list
