@@ -1,6 +1,7 @@
 from Product import (TV, Mobile, Computer)
 from Receipt import Receipt
 from Workshop import Workshop
+from Admin import Admin
 import src
 
 def return_menu():
@@ -95,12 +96,81 @@ def user(workshop):
     except Exception as e:
         print(e)
 
+def check_info(workshop, login, password):
+    for admin in workshop.admin_list:
+        if admin.login == login and admin.password == password:
+            return True
+    else:
+        return False
+
+def operations_with_admins(workshop):
+    while True:
+        path_info = input(src.VARIANT+src.ADMIN_ADMINS)
+        if path_info == "1":
+            workshop.all_admins()
+        elif path_info == "2":
+            login1 = input(src.ADMIN_LOGIN)
+            workshop.delete_admin(login1)
+        elif path_info == "3":
+            login1 = input(src.ADMIN_LOGIN)
+            password = input(src.ADMIN_PASSWORD)
+            workshop.add_admin(login1, password)
+        else:
+            print(src.USER_WRONG)
+        break
+
+def operations_with_receipts(workshop, login):
+    while True:
+        path_info = input(src.VARIANT+src.ADMIN_RECEIPT)
+        if path_info == "1":
+            admin = workshop.get_admin(login)
+            number_receipt = int(input(src.ADMIN_RECEIPT_NUMBER))
+            status = int(input(src.ADMIN_RECEIPT_STATUS))
+            admin.change_status(workshop, number_receipt, status)
+        elif path_info == "2":
+            admin = workshop.get_admin(login)
+            number_receipt = int(input(src.ADMIN_RECEIPT_NUMBER))
+            dateofissue = input(src.ADMIN_RECEIPT_NEW_DATE)
+            admin.change_date(workshop, number_receipt, dateofissue)
+        elif path_info == "3":
+            number_receipt = int(input(src.ADMIN_RECEIPT_NUMBER))
+            print(workshop.get_receipt(number_receipt))
+        else:
+            print(src.USER_WRONG)
+        break
+
+def admin(workshop):
+    try:
+        login = input(src.ADMIN_LOGIN)
+        password = input(src.ADMIN_PASSWORD)
+        if check_info(workshop, login, password):
+            while True:
+                choice = input(src.VARIANT + src.ADMIN_PATH)
+                if choice == "1":
+                    operations_with_admins(workshop)
+                    if return_menu():
+                        break
+                    else:
+                        continue
+                elif choice == "2":
+                    operations_with_receipts(workshop, login)
+                    if return_menu():
+                        break
+                    else:
+                        continue
+        else:
+            print("Неправильный login или пароль")
+    except Exception as e:
+        print(e)
+
 def main():
-    workshop = Workshop([], src.PASSWORD)
+    workshop = Workshop([], [Admin("admin", "123")])
     while True:
         choice = input(src.VARIANT+src.MAIN_PATH)
         if choice == "1":
             user(workshop)
+        elif choice == "2":
+            admin(workshop)
         else:
             break
 
